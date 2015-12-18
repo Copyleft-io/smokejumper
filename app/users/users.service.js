@@ -30,4 +30,4 @@ app.factory('Users', function($firebaseArray, $firebaseObject, FIREBASE_URL){
 
     return Users;
   });
-  console.log('--> basestation/app/users/users.service.js loaded');
+  console.log('--> smokejumper/app/users/users.service.js loaded');

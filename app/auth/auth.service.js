@@ -5,4 +5,4 @@ app.factory('Auth', function($firebaseAuth, FIREBASE_URL){
 
     return auth;
   });
-console.log('--> basestation/app/auth/auth.service.js loaded');
+console.log('--> smokejumper/app/auth/auth.service.js loaded');  

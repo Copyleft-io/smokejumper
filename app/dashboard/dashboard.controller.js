@@ -5,4 +5,4 @@ app.controller('DashboardCtrl', function($state, md5, auth){
 
   });
 
-console.log('--> basestation/app/dashboard/dashboard.controller.js loaded');
+console.log('--> smokejumper/app/dashboard/dashboard.controller.js loaded');

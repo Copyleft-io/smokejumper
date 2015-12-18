@@ -24,4 +24,4 @@ app.controller('AuthCtrl', function(Auth, $state){
     };
 
   });
-  console.log('--> basestation/app/auth/auth.controller.js loaded');
+  console.log('--> smokejumper/app/auth/auth.controller.js loaded');

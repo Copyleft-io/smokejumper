@@ -6,7 +6,7 @@ app.controller('ProfileCtrl', function($state, Auth, md5, auth, profile){
       profileCtrl.profile.email = auth.password.email;
       profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
       profileCtrl.profile.$save().then(function(){
-        $state.go('channels');
+        $state.go('profile');
       });
     };
     profileCtrl.logout = function(){
@@ -18,4 +18,4 @@ app.controller('ProfileCtrl', function($state, Auth, md5, auth, profile){
     };
   });
 
-console.log('--> basestation/app/users.profile.js loaded');
+console.log('--> smokejumper/app/users.profile.js loaded');
