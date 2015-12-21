@@ -81,6 +81,43 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
             });
           }
         }
+      })
+      .state('alarms', {
+        url: '/alarms',
+        controller: 'AlarmsCtrl as alarmsCtrl',
+        templateUrl: 'alarms/index.html',
+        resolve: {
+          alarms: function (Alarms){
+             return Alarms();
+           },
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('alarms/create', {
+        url: '/alarms/create',
+        templateUrl: 'alarms/create.html',
+        controller: 'AlarmsCtrl as alarmsCtrl',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('alarms/view', {
+        url: '/alarms/view/{alarmId}',
+        templateUrl: 'alarms/view.html',
+        controller: 'AlarmsCtrl as alarmsCtrl'
+      })
+      .state('alarms/edit', {
+        url: '/alarms/edit/{alarmId}',
+        templateUrl: 'alarms/edit.html',
+        controller: 'AlarmsCtrl as alarmsCtrl'
       });
     $urlRouterProvider.otherwise('/');
   })

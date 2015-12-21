@@ -1,0 +1,36 @@
+
+<form class="form-horizontal well" ng-submit="update()" ng-init="getAlarm()">
+  <fieldset>
+    <legend>Edit Alarm</legend>
+    <div class="form-group">
+      <label for="inputId" class="col-lg-2 control-label">Id</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputId" placeholder="id" ng-model="alarm.$id" readonly>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputMessage" class="col-lg-2 control-label">Message</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputMessage" placeholder="message" ng-model="alarm.message" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputType" class="col-lg-2 control-label">Type</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputType" placeholder="type" ng-model="alarm.type" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+      <div class="col-lg-10">
+        <div text-angular ng-model="alarm.description" ></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <a href="#/requests" class="btn btn-xs btn-default">Cancel</a>
+        <button type="submit" class="btn btn-xs btn-primary">Save</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
