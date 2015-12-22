@@ -1,4 +1,4 @@
-<h3><i class="fa fa-list-ul"></i> &nbsp; Procedures</h3>
+<h3><i class="fa fa-fire-extinguisher"></i> &nbsp; Procedures</h3>
 
 <br/>
 <button ng-click="tableProcedures.filter({})" class="btn btn-sm pull-right" style="padding:10px;">Clear Filter</button>
@@ -6,7 +6,7 @@
 
         <tr ng-repeat="procedure in $data">
 
-            <td data-title="'Type'" class="align-left" filter="{ 'message': 'text' }">
+            <td data-title="'Message'" class="align-left" filter="{ 'message': 'text' }">
                 {{procedure.message}}
             </td>
             <td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">

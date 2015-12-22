@@ -1,1 +1,84 @@
-<form class="form-horizontal well" ng-submit="create(procedure)"> <fieldset> <legend>Create Procedure</legend> <div class="form-group"> <label for="inputMessage" class="col-lg-2 control-label">Message</label> <div class="col-lg-10"> <input type="text" class="form-control" id="inputMessage" placeholder="message" ng-model="procedure.message"> </div> </div> <div class="form-group"> <label for="inputSource" class="col-lg-2 control-label">Source</label> <div class="col-lg-10"> <input type="text" class="form-control" id="inputSource" placeholder="source" ng-model="procedure.source"> </div> </div> <div class="form-group"> <label for="inputType" class="col-lg-2 control-label">Type</label> <div class="col-lg-10"> <select id="inputType" class="form-control" placeholder="type" ng-model="procedure.type"> <option>Crown Procedure <option>Surface Procedure <option>Ground Procedure </select> </div> </div> <div class="form-group"> <label for="inputEnvironment" class="col-lg-2 control-label">Environment</label> <div class="col-lg-10"> <select id="inputEnvironment" class="form-control" placeholder="environment" ng-model="procedure.environment"> <option>Production <option>Staging <option>Development </select> </div> </div> <div class="form-group"> <label for="inputNetwork" class="col-lg-2 control-label">Network</label> <div class="col-lg-10"> <input type="text" class="form-control" id="inputNetwork" placeholder="network" ng-model="procedure.network"> </div> </div> <div class="form-group"> <label for="inputDevice" class="col-lg-2 control-label">Device</label> <div class="col-lg-10"> <input type="text" class="form-control" id="inputDevice" placeholder="device" ng-model="procedure.device"> </div> </div> <div class="form-group"> <label for="inputApplication" class="col-lg-2 control-label">Application</label> <div class="col-lg-10"> <input type="text" class="form-control" id="inputApplication" placeholder="application" ng-model="procedure.application"> </div> </div> <div class="form-group"> <label for="inputStatus" class="col-lg-2 control-label">Status</label> <div class="col-lg-10"> <select id="inputStatus" class="form-control" placeholder="status" ng-model="procedure.status"> <option>Draft <option>Active <option>Inactive </select> </div> </div> <div class="form-group"> <label for="inputDescription" class="col-lg-2 control-label">Description</label> <div class="col-lg-10"> <div text-angular ng-model="procedure.description"></div> </div> </div> <div class="form-group"> <label for="inputSteps" class="col-lg-2 control-label">Detailed Steps</label> <div class="col-lg-10"> <div text-angular ng-model="procedure.steps"></div> </div> </div> <div class="form-group"> <div class="col-lg-10 col-lg-offset-2"> <a href="#/procedures" type="reset" class="btn btn-sm btn-default">Cancel</a> <button type="submit" class="btn btn-sm btn-primary">Save</button> </div> </div> </fieldset> </form>
+
+<form class="form-horizontal well" ng-submit="create(procedure)" >
+  <fieldset>
+    <legend>Create Procedure</legend>
+    <div class="form-group">
+      <label for="inputMessage" class="col-lg-2 control-label">Message</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputMessage" placeholder="message" ng-model="procedure.message" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputSource" class="col-lg-2 control-label">Source</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputSource" placeholder="source" ng-model="procedure.source" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputType" class="col-lg-2 control-label">Type</label>
+      <div class="col-lg-10">
+        <select id="inputType" class="form-control" placeholder="type" ng-model="procedure.type">
+          <option>Crown Procedure</option>
+          <option>Surface Procedure</option>
+          <option>Ground Procedure</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEnvironment" class="col-lg-2 control-label">Environment</label>
+      <div class="col-lg-10">
+        <select id="inputEnvironment" class="form-control" placeholder="environment" ng-model="procedure.environment">
+          <option>Production</option>
+          <option>Staging</option>
+          <option>Development</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputNetwork" class="col-lg-2 control-label">Network</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputNetwork" placeholder="network" ng-model="procedure.network" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDevice" class="col-lg-2 control-label">Device</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputDevice" placeholder="device" ng-model="procedure.device" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputApplication" class="col-lg-2 control-label">Application</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputApplication" placeholder="application" ng-model="procedure.application" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputStatus" class="col-lg-2 control-label">Status</label>
+      <div class="col-lg-10">
+        <select id="inputStatus" class="form-control" placeholder="status" ng-model="procedure.status">
+          <option>Draft</option>
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+      <div class="col-lg-10">
+        <div text-angular ng-model="procedure.description" ></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputSteps" class="col-lg-2 control-label">Detailed Steps</label>
+      <div class="col-lg-10">
+        <div text-angular ng-model="procedure.steps" ></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <a href="#/procedures" type="reset" class="btn btn-sm btn-default">Cancel</a>
+        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
