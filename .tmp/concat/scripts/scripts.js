@@ -118,6 +118,43 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
         url: '/alarms/edit/{alarmId}',
         templateUrl: 'alarms/edit.html',
         controller: 'AlarmsCtrl as alarmsCtrl'
+      })
+      .state('fires', {
+        url: '/fires',
+        controller: 'FiresCtrl as FiresCtrl',
+        templateUrl: 'fires/index.html',
+        resolve: {
+          fires: ["Fires", function (Fires){
+             return Fires();
+           }],
+          auth: ["$state", "Users", "Auth", function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }]
+        }
+      })
+      .state('fires/create', {
+        url: '/fires/create',
+        templateUrl: 'fires/create.html',
+        controller: 'FiresCtrl as firesCtrl',
+        resolve: {
+          auth: ["$state", "Users", "Auth", function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }]
+        }
+      })
+      .state('fires/view', {
+        url: '/fires/view/{fireId}',
+        templateUrl: 'fires/view.html',
+        controller: 'FiresCtrl as firesCtrl'
+      })
+      .state('fires/edit', {
+        url: '/fires/edit/{fireId}',
+        templateUrl: 'fires/edit.html',
+        controller: 'FiresCtrl as firesCtrl'
       });
     $urlRouterProvider.otherwise('/');
   }])
@@ -341,3 +378,118 @@ app.controller("AlarmsCtrl", ["$state", "$scope", "FIREBASE_URL", "$firebaseObje
 }]);
 
 console.log('--> smokejumper/app/alarms/alarms.controller.js loaded');
+
+'use strict';
+
+app.factory("Fires", ["FIREBASE_URL", "$firebaseArray", function FireFactory(FIREBASE_URL, $firebaseArray) {
+  return function(){
+    // snapshot of our data
+    var ref = new Firebase(FIREBASE_URL + 'fires');
+    // returning synchronized array
+    return $firebaseArray(ref);
+  }
+}]);
+
+console.log('--> smokejumper/app/fires/fires.service.js loaded');
+
+'use strict';
+
+app.controller("FiresCtrl", ["$state", "$scope", "FIREBASE_URL", "$firebaseObject", "$firebaseArray", "$stateParams", "ngTableParams", "$filter", "Fires", function($state, $scope, FIREBASE_URL, $firebaseObject, $firebaseArray, $stateParams, ngTableParams, $filter, Fires) {
+
+    $scope.fires = Fires();
+
+    // add a new fire
+    $scope.create = function(fire) {
+      $scope.fires.$add(fire).then(function() {
+        console.log('fire Created');
+        //$location.path('/fires');
+        $state.go('fires');
+
+      }).catch(function(error) {
+        console.log(error);
+      });
+    };
+
+    // remove an fire
+    $scope.delete = function(fire) {
+        $scope.fires.$remove(fire).then(function(){
+            console.log('fire Deleted');
+            //$scope.tableFires.reload();
+        }).catch(function(error){
+            console.log(error);
+        });
+    };
+
+    // getFire on init for /fires/edit/:id route
+    $scope.getFire = function() {
+      var ref = new Firebase(FIREBASE_URL + 'fires');
+      $scope.fire = $firebaseObject(ref.child($stateParams.fireId));
+    };
+
+    // update a fire and save it
+    $scope.update = function() {
+      // save firebaseObject
+      $scope.fire.$save().then(function(){
+        console.log('fire Updated');
+        // redirect to /fire path after update
+        //$location.path('/fires');
+        $state.go('fires');
+      }).catch(function(error){
+        console.log(error);
+      });
+    };
+
+    // Since the data is asynchronous we'll need to use the $loaded promise.
+    // Once data is available we'll set the data variable and init the ngTable
+    $scope.fires.$loaded().then(function(fires) {
+      console.log(fires.length); // data is loaded here
+      var data = fires;
+
+      $scope.tableFires = new ngTableParams({
+            page: 1,            // show first page
+            count: 10,          // count per page
+            sorting: { title: 'asc' }    // initial sorting
+        }, {
+            total: data.length, // length of data
+            getData: function($defer, params) {
+                // use build-in angular filter
+                var orderedData = params.sorting() ? $filter('filter')(data, params.filter()) : data;
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
+
+    });
+
+    // Listening for list updates to Fires to update Table
+    var ref = new Firebase(FIREBASE_URL + 'fires');
+    var list = $firebaseArray(ref);
+    list.$watch(function(event) {
+      console.log(event);
+      $scope.fires.$loaded().then(function(){
+        $scope.tableFires.reload();
+      });
+    });
+
+    // Listening for Child removed
+    //
+    //var ref = new Firebase(FIREBASE_URL + 'environments');
+    // $scope.environments.on('child_removed', function() {
+    //   console.log('/environments child removed');
+    //    $scope.tableEnvironments.reload();
+    //  });
+
+
+
+     // logs { event: "child_removed", key: "foo" }
+    //  list.$remove({
+    //    console.log('Environments List Updated... List Item Added');
+    //  });
+
+     // logs { event: "child_added", key: "<new _id>", prevId: "<prev_id>" }
+    //  list.$add({
+    //    console.log('Environments List Updated... List Item Removed');
+    //  });
+
+}]);
+
+console.log('--> smokejumper/app/fires/fires.controller.js loaded');

@@ -118,6 +118,43 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
         url: '/alarms/edit/{alarmId}',
         templateUrl: 'alarms/edit.html',
         controller: 'AlarmsCtrl as alarmsCtrl'
+      })
+      .state('fires', {
+        url: '/fires',
+        controller: 'FiresCtrl as FiresCtrl',
+        templateUrl: 'fires/index.html',
+        resolve: {
+          fires: function (Fires){
+             return Fires();
+           },
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('fires/create', {
+        url: '/fires/create',
+        templateUrl: 'fires/create.html',
+        controller: 'FiresCtrl as firesCtrl',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('fires/view', {
+        url: '/fires/view/{fireId}',
+        templateUrl: 'fires/view.html',
+        controller: 'FiresCtrl as firesCtrl'
+      })
+      .state('fires/edit', {
+        url: '/fires/edit/{fireId}',
+        templateUrl: 'fires/edit.html',
+        controller: 'FiresCtrl as firesCtrl'
       });
     $urlRouterProvider.otherwise('/');
   })
