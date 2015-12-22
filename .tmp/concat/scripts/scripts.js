@@ -121,7 +121,7 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
       })
       .state('fires', {
         url: '/fires',
-        controller: 'FiresCtrl as FiresCtrl',
+        controller: 'FiresCtrl as firesCtrl',
         templateUrl: 'fires/index.html',
         resolve: {
           fires: ["Fires", function (Fires){
@@ -155,6 +155,43 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
         url: '/fires/edit/{fireId}',
         templateUrl: 'fires/edit.html',
         controller: 'FiresCtrl as firesCtrl'
+      })
+      .state('procedures', {
+        url: '/procedures',
+        controller: 'ProceduresCtrl as proceduresCtrl',
+        templateUrl: 'procedures/index.html',
+        resolve: {
+          procedures: ["Procedures", function (Procedures){
+             return Procedures();
+           }],
+          auth: ["$state", "Users", "Auth", function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }]
+        }
+      })
+      .state('procedures/create', {
+        url: '/procedures/create',
+        templateUrl: 'procedures/create.html',
+        controller: 'ProceduresCtrl as proceduresCtrl',
+        resolve: {
+          auth: ["$state", "Users", "Auth", function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }]
+        }
+      })
+      .state('procedures/view', {
+        url: '/procedures/view/{procedureId}',
+        templateUrl: 'procedures/view.html',
+        controller: 'ProceduresCtrl as proceduresCtrl'
+      })
+      .state('procedures/edit', {
+        url: '/procedures/edit/{procedureId}',
+        templateUrl: 'procedures/edit.html',
+        controller: 'ProceduresCtrl as proceduresCtrl'
       });
     $urlRouterProvider.otherwise('/');
   }])
@@ -493,3 +530,118 @@ app.controller("FiresCtrl", ["$state", "$scope", "FIREBASE_URL", "$firebaseObjec
 }]);
 
 console.log('--> smokejumper/app/fires/fires.controller.js loaded');
+
+'use strict';
+
+app.factory("Procedures", ["FIREBASE_URL", "$firebaseArray", function ProcedureFactory(FIREBASE_URL, $firebaseArray) {
+  return function(){
+    // snapshot of our data
+    var ref = new Firebase(FIREBASE_URL + 'procedures');
+    // returning synchronized array
+    return $firebaseArray(ref);
+  }
+}]);
+
+console.log('--> smokejumper/app/procedures/procedures.service.js loaded');
+
+'use strict';
+
+app.controller("ProceduresCtrl", ["$state", "$scope", "FIREBASE_URL", "$firebaseObject", "$firebaseArray", "$stateParams", "ngTableParams", "$filter", "Procedures", function($state, $scope, FIREBASE_URL, $firebaseObject, $firebaseArray, $stateParams, ngTableParams, $filter, Procedures) {
+
+    $scope.procedures = Procedures();
+
+    // add a new procedure
+    $scope.create = function(procedure) {
+      $scope.procedures.$add(procedure).then(function() {
+        console.log('procedure Created');
+        //$location.path('/procedures');
+        $state.go('procedures');
+
+      }).catch(function(error) {
+        console.log(error);
+      });
+    };
+
+    // remove an procedure
+    $scope.delete = function(procedure) {
+        $scope.procedures.$remove(procedure).then(function(){
+            console.log('procedure Deleted');
+            //$scope.tableProcedures.reload();
+        }).catch(function(error){
+            console.log(error);
+        });
+    };
+
+    // getProcedure on init for /procedures/edit/:id route
+    $scope.getProcedure = function() {
+      var ref = new Firebase(FIREBASE_URL + 'procedures');
+      $scope.procedure = $firebaseObject(ref.child($stateParams.procedureId));
+    };
+
+    // update a procedure and save it
+    $scope.update = function() {
+      // save firebaseObject
+      $scope.procedure.$save().then(function(){
+        console.log('procedure Updated');
+        // redirect to /procedure path after update
+        //$location.path('/procedures');
+        $state.go('procedures');
+      }).catch(function(error){
+        console.log(error);
+      });
+    };
+
+    // Since the data is asynchronous we'll need to use the $loaded promise.
+    // Once data is available we'll set the data variable and init the ngTable
+    $scope.procedures.$loaded().then(function(procedures) {
+      console.log(procedures.length); // data is loaded here
+      var data = procedures;
+
+      $scope.tableProcedures = new ngTableParams({
+            page: 1,            // show first page
+            count: 10,          // count per page
+            sorting: { title: 'asc' }    // initial sorting
+        }, {
+            total: data.length, // length of data
+            getData: function($defer, params) {
+                // use build-in angular filter
+                var orderedData = params.sorting() ? $filter('filter')(data, params.filter()) : data;
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
+
+    });
+
+    // Listening for list updates to Procedures to update Table
+    var ref = new Firebase(FIREBASE_URL + 'procedures');
+    var list = $firebaseArray(ref);
+    list.$watch(function(event) {
+      console.log(event);
+      $scope.procedures.$loaded().then(function(){
+        $scope.tableProcedures.reload();
+      });
+    });
+
+    // Listening for Child removed
+    //
+    //var ref = new Firebase(FIREBASE_URL + 'environments');
+    // $scope.environments.on('child_removed', function() {
+    //   console.log('/environments child removed');
+    //    $scope.tableEnvironments.reload();
+    //  });
+
+
+
+     // logs { event: "child_removed", key: "foo" }
+    //  list.$remove({
+    //    console.log('Environments List Updated... List Item Added');
+    //  });
+
+     // logs { event: "child_added", key: "<new _id>", prevId: "<prev_id>" }
+    //  list.$add({
+    //    console.log('Environments List Updated... List Item Removed');
+    //  });
+
+}]);
+
+console.log('--> smokejumper/app/procedures/procedures.controller.js loaded');

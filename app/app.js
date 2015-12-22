@@ -121,7 +121,7 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
       })
       .state('fires', {
         url: '/fires',
-        controller: 'FiresCtrl as FiresCtrl',
+        controller: 'FiresCtrl as firesCtrl',
         templateUrl: 'fires/index.html',
         resolve: {
           fires: function (Fires){
@@ -155,6 +155,43 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
         url: '/fires/edit/{fireId}',
         templateUrl: 'fires/edit.html',
         controller: 'FiresCtrl as firesCtrl'
+      })
+      .state('procedures', {
+        url: '/procedures',
+        controller: 'ProceduresCtrl as proceduresCtrl',
+        templateUrl: 'procedures/index.html',
+        resolve: {
+          procedures: function (Procedures){
+             return Procedures();
+           },
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('procedures/create', {
+        url: '/procedures/create',
+        templateUrl: 'procedures/create.html',
+        controller: 'ProceduresCtrl as proceduresCtrl',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('procedures/view', {
+        url: '/procedures/view/{procedureId}',
+        templateUrl: 'procedures/view.html',
+        controller: 'ProceduresCtrl as proceduresCtrl'
+      })
+      .state('procedures/edit', {
+        url: '/procedures/edit/{procedureId}',
+        templateUrl: 'procedures/edit.html',
+        controller: 'ProceduresCtrl as proceduresCtrl'
       });
     $urlRouterProvider.otherwise('/');
   })
