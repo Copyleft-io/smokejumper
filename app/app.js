@@ -61,6 +61,23 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
           }
         }
       })
+      .state('directory', {
+        url: '/directory',
+        controller: 'DirectoryCtrl as directoryCtrl',
+        templateUrl: 'directory/index.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          },
+          dashboard: function(Users, Auth){
+            return Auth.$requireAuth().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
+      })
       .state('about', {
         url: '/about',
         templateUrl: 'static/about.html'
