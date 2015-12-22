@@ -5,15 +5,31 @@
     <table ng-table="tableAlarms" class="table table-striped table-bordered" show-filter="true">
 
         <tr ng-repeat="alarm in $data">
-            <td data-title="'Message'" class="align-left" filter="{ 'message': 'text' }">
-                {{alarm.message}}
-            </td>
-            <td data-title="'Source'" class="align-left" filter="{ 'source': 'text' }">
-                {{alarm.source}}
-            </td>
+
             <td data-title="'Type'" class="align-left" filter="{ 'type': 'text' }">
                 {{alarm.type}}
             </td>
+            <td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">
+                {{alarm.environment}}
+            </td>
+            <td data-title="'Device'" class="align-left" filter="{ 'device': 'text' }">
+                {{alarm.device}}
+            </td>
+            <td data-title="'Application'" class="align-left" filter="{ 'application': 'text' }">
+                {{alarm.application}}
+            </td>
+            <!--<td data-title="'Source'" class="align-left" filter="{ 'source': 'text' }">
+                {{alarm.source}}
+            </td>-->
+            <td data-title="'Status'" class="align-left" filter="{ 'status': 'text' }">
+                {{alarm.status}}
+            </td>
+
+<!--
+            <td data-title="'Message'" class="align-left" filter="{ 'message': 'text' }">
+                {{alarm.message}}
+            </td>
+-->
             <!--<td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">
                 {{device.environment}}
             </td>
