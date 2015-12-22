@@ -1,36 +1,10 @@
-<h3><i class="fa fa-bell"></i> &nbsp; Alarms</h3>
-
-<br/>
-<button ng-click="tableAlarms.filter({})" class="btn btn-sm pull-right" style="padding:10px;">Clear Filter</button>
-    <table ng-table="tableAlarms" class="table table-striped table-bordered" show-filter="true">
-
-        <tr ng-repeat="alarm in $data">
-
-            <td data-title="'Type'" class="align-left" filter="{ 'type': 'text' }">
-                {{alarm.type}}
-            </td>
-            <td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">
-                {{alarm.environment}}
-            </td>
-            <td data-title="'Device'" class="align-left" filter="{ 'device': 'text' }">
-                {{alarm.device}}
-            </td>
-            <td data-title="'Application'" class="align-left" filter="{ 'application': 'text' }">
-                {{alarm.application}}
-            </td>
-            <!--<td data-title="'Source'" class="align-left" filter="{ 'source': 'text' }">
+<h3><i class="fa fa-bell"></i> &nbsp; Alarms</h3> <br> <button ng-click="tableAlarms.filter({})" class="btn btn-sm pull-right" style="padding:10px">Clear Filter</button> <table ng-table="tableAlarms" class="table table-striped table-bordered" show-filter="true"> <tr ng-repeat="alarm in $data"> <td data-title="'Type'" class="align-left" filter="{ 'type': 'text' }"> {{alarm.type}}  <td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }"> {{alarm.environment}}  <td data-title="'Device'" class="align-left" filter="{ 'device': 'text' }"> {{alarm.device}}  <td data-title="'Application'" class="align-left" filter="{ 'application': 'text' }"> {{alarm.application}}  <!--<td data-title="'Source'" class="align-left" filter="{ 'source': 'text' }">
                 {{alarm.source}}
-            </td>-->
-            <td data-title="'Status'" class="align-left" filter="{ 'status': 'text' }">
-                {{alarm.status}}
-            </td>
-
-<!--
+            </td>--> <td data-title="'Status'" class="align-left" filter="{ 'status': 'text' }"> {{alarm.status}}  <!--
             <td data-title="'Message'" class="align-left" filter="{ 'message': 'text' }">
                 {{alarm.message}}
             </td>
--->
-            <!--<td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">
+--> <!--<td data-title="'Environment'" class="align-left" filter="{ 'environment': 'text' }">
                 {{device.environment}}
             </td>
             <td data-title="'Public_IP'" class="align-left" filter="{ 'public_ip': 'text' }">
@@ -38,15 +12,4 @@
             </td>
             <td data-title="'Private_IP'" class="align-left" filter="{ 'private_ip': 'text' }">
                 {{device.private_ip}}
-            </td>-->
-            <td>
-              <a href="#/alarms/view/{{alarm.$id}}" class="btn btn-xs btn-default"><i class="fa fa-search"> </i></a>
-              <a href="#/alarms/edit/{{alarm.$id}}" class="btn btn-xs btn-success"><i class="fa fa-pencil-square-o"> </i></a>
-              <a href="" ng-click='delete(alarm)' class="btn btn-xs btn-warning"><i class="fa fa-trash-o"> </i></a>
-            </td>
-        </tr>
-
-    </table>
-    <a href="#/alarms/create" class="btn btn-sm btn-primary pull-left" style="padding:10px;"><i class="fa fa-lg fa-plus"></i> &nbsp;Create Alarm</a>
-
-</div>
+            </td>--> <td> <a href="#/alarms/view/{{alarm.$id}}" class="btn btn-xs btn-default"><i class="fa fa-search"> </i></a> <a href="#/alarms/edit/{{alarm.$id}}" class="btn btn-xs btn-success"><i class="fa fa-pencil-square-o"> </i></a> <a href="" ng-click="delete(alarm)" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"> </i></a>   </table> <a href="#/alarms/create" class="btn btn-sm btn-primary pull-left" style="padding:10px"><i class="fa fa-lg fa-plus"></i> &nbsp;Create Alarm</a> 
