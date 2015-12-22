@@ -1,0 +1,50 @@
+/* Alarm Labels */
+
+/* PROBLEM */
+.problem {
+  background-color: #777;
+}
+.problem[href]:hover,
+.problem[href]:focus {
+  background-color: #5e5e5e;
+}
+
+/* WARNING */
+.Warning {
+  background-color: #f0ad4e;
+}
+.Warning[href]:hover,
+.Warning[href]:focus {
+  background-color: #ec971f;
+}
+
+/* DANGER */
+.danger {
+  background-color: #d9534f;
+}
+.danger[href]:hover,
+.danger[href]:focus {
+  background-color: #c9302c;
+}
+
+.label-primary {
+  background-color: #337ab7;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+  background-color: #286090;
+}
+.label-success {
+  background-color: #5cb85c;
+}
+.label-success[href]:hover,
+.label-success[href]:focus {
+  background-color: #449d44;
+}
+.label-info {
+  background-color: #5bc0de;
+}
+.label-info[href]:hover,
+.label-info[href]:focus {
+  background-color: #31b0d5;
+}
