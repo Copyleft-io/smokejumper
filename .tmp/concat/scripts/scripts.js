@@ -78,8 +78,8 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
           }]
         }
       })
-      .state('directory/user/view', {
-        url: '/directory/user/view/{userId}',
+      .state('directory/user', {
+        url: '/directory/user/{userId}',
         templateUrl: 'directory/view.html',
         controller: 'DirectoryCtrl as directoryCtrl'
       })
@@ -325,6 +325,7 @@ console.log('--> smokejumper/app/dashboard/dashboard.controller.js loaded');
 
 'use strict';
 app.controller('DirectoryCtrl', ["$state", "$scope", "FIREBASE_URL", "$firebaseObject", "$firebaseArray", "$stateParams", "ngTableParams", "$filter", "Users", function($state, $scope, FIREBASE_URL, $firebaseObject, $firebaseArray, $stateParams, ngTableParams, $filter, Users){
+
     var usersRef = new Firebase(FIREBASE_URL+'users');
     $scope.users = $firebaseArray(usersRef);
 

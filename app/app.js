@@ -78,8 +78,8 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
           }
         }
       })
-      .state('directory/user/view', {
-        url: '/directory/user/view/{userId}',
+      .state('directory/user', {
+        url: '/directory/user/{userId}',
         templateUrl: 'directory/view.html',
         controller: 'DirectoryCtrl as directoryCtrl'
       })

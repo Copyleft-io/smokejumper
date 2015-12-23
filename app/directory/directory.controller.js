@@ -1,5 +1,6 @@
 'use strict';
 app.controller('DirectoryCtrl', function($state, $scope, FIREBASE_URL, $firebaseObject, $firebaseArray, $stateParams, ngTableParams, $filter, Users){
+
     var usersRef = new Firebase(FIREBASE_URL+'users');
     $scope.users = $firebaseArray(usersRef);
 
