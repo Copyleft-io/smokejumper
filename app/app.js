@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', 'ngTable', 'textAngular'])
+var app = angular.module('smokejumper', ['firebase','angular-md5','ui.bootstrap','ui.router', 'ngTable', 'textAngular'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {

@@ -1,11 +1,14 @@
-
 <form class="form-horizontal well" ng-init="getUser()">
   <fieldset>
-    <legend>View Directory Profile</legend>
+    <legend><a href="#/directory"> Directory </a> &gt; {{user.displayName}}</legend>
+    <br>
+    <uib-tabset justified="true">
+        <uib-tab heading="Personal">
+          <br>
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+      <label for="inputUsername" class="col-lg-2 control-label">Username</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="user.email" readonly >
+        <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.email" readonly >
       </div>
     </div>
     <div class="form-group">
@@ -41,7 +44,7 @@
     <div class="form-group">
       <label for="textAreaBio" class="col-lg-2 control-label">Bio</label>
       <div class="col-lg-10">
-        <textarea class="form-control" rows="3" id="textArea" ng-model="user.bio"></textarea>
+        <textarea class="form-control" rows="3" id="textArea" ng-model="user.bio" readonly ></textarea>
       </div>
     </div>
     <!--<div class="form-group">
@@ -81,10 +84,39 @@
         </select>
       </div>
     </div>-->
+  </uib-tab>
+  <uib-tab heading="Contact">
+    <br>
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <a href="#/directory" type="reset" class="btn btn-sm btn-default">Back</a>
-      </div>
+      <label for="inputWorkPhone" class="col-lg-2 control-label">Work</label>
+      <div class="col-lg-5">
+      <input name="workPhone" type="text" class="form-control" placeholder="Work Telephone" ng-model="user.workPhone" readonly >
     </div>
+  </div>
+  <div class="form-group">
+    <label for="inputMobilePhone" class="col-lg-2 control-label">Mobile</label>
+    <div class="col-lg-5">
+    <input name="mobilePhone" type="text" class="form-control" placeholder="Mobile Telephone" ng-model="user.mobilePhone" readonly>
+  </div>
+</div>
+<div class="form-group">
+  <label for="inputHomePhone" class="col-lg-2 control-label">Home</label>
+  <div class="col-lg-5">
+  <input name="homePhone" type="text" class="form-control" placeholder="Home Telephone" ng-model="user.homePhone" readonly >
+</div>
+</div>
+<div class="form-group">
+  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+  <div class="col-lg-5">
+    <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="user.email" readonly >
+  </div>
+</div>
+
+  </uib-tab>
+    <uib-tab heading="Organization">
+      <p>TODO PUT ORGANIZATION INFORMATION HERE</p>
+    </uib-tab>
+  </uib-tabset>
+
   </fieldset>
 </form>
