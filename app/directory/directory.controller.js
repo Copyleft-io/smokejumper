@@ -4,10 +4,10 @@ app.controller('DirectoryCtrl', function($state, $scope, FIREBASE_URL, $firebase
     $scope.users = $firebaseArray(usersRef);
 
     // getUser on /directory/user/view/:id route
-    // $scope.getProfile = function() {
-    //   var ref = new Firebase(FIREBASE_URL + 'users');
-    //   $scope.user = $firebaseObject(ref.child($stateParams.userId));
-    // };
+    $scope.getUser = function() {
+    var ref = new Firebase(FIREBASE_URL + 'users');
+    $scope.user = $firebaseObject(ref.child($stateParams.userId));
+    };
 
     // Since the data is asynchronous we'll need to use the $loaded promise.
     // Once data is available we'll set the data variable and init the ngTable

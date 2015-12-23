@@ -78,6 +78,11 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.router', '
           }]
         }
       })
+      .state('directory/user/view', {
+        url: '/directory/user/view/{userId}',
+        templateUrl: 'directory/view.html',
+        controller: 'DirectoryCtrl as directoryCtrl'
+      })
       .state('about', {
         url: '/about',
         templateUrl: 'static/about.html'
@@ -324,10 +329,10 @@ app.controller('DirectoryCtrl', ["$state", "$scope", "FIREBASE_URL", "$firebaseO
     $scope.users = $firebaseArray(usersRef);
 
     // getUser on /directory/user/view/:id route
-    // $scope.getProfile = function() {
-    //   var ref = new Firebase(FIREBASE_URL + 'users');
-    //   $scope.user = $firebaseObject(ref.child($stateParams.userId));
-    // };
+    $scope.getUser = function() {
+    var ref = new Firebase(FIREBASE_URL + 'users');
+    $scope.user = $firebaseObject(ref.child($stateParams.userId));
+    };
 
     // Since the data is asynchronous we'll need to use the $loaded promise.
     // Once data is available we'll set the data variable and init the ngTable
