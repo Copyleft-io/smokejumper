@@ -2,27 +2,45 @@
 <form class="form-horizontal well" ng-submit="update()" ng-init="getAlarm()">
   <fieldset>
     <legend>Edit Alarm</legend>
+    <uib-tabset>
+
+        <uib-tab>
+        <uib-tab-heading> <i class="fa fa-info-circle"></i> Details </uib-tab-heading>
+        <br>
+        <div class="well">
+          <p class="lead">Summary</p>
     <div class="form-group">
-      <label for="inputId" class="col-lg-2 control-label">Id</label>
-      <div class="col-lg-10">
+      <label for="inputId" class="col-lg-2 control-label">Alarm Id</label>
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputId" placeholder="id" ng-model="alarm.$id" readonly>
       </div>
     </div>
     <div class="form-group">
       <label for="inputMessage" class="col-lg-2 control-label">Message</label>
-      <div class="col-lg-10">
+      <div class="col-lg-5">
         <input type="text" class="form-control" id="inputMessage" placeholder="message" ng-model="alarm.message" >
       </div>
     </div>
     <div class="form-group">
+      <label for="inputStatus" class="col-lg-2 control-label">Status</label>
+      <div class="col-lg-3">
+        <select id="inputStatus" class="form-control" placeholder="status" ng-model="alarm.status">
+          <option>Open</option>
+          <option>Acknowledged</option>
+          <option>Resolved</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="inputSource" class="col-lg-2 control-label">Source</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputSource" placeholder="source" ng-model="alarm.source" >
       </div>
     </div>
     <div class="form-group">
       <label for="inputType" class="col-lg-2 control-label">Type</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <select id="inputType" class="form-control" placeholder="type" ng-model="alarm.type">
           <option>Danger</option>
           <option>Warning</option>
@@ -32,7 +50,7 @@
     </div>
     <div class="form-group">
       <label for="inputEnvironment" class="col-lg-2 control-label">Environment</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <select id="inputEnvironment" class="form-control" placeholder="environment" ng-model="alarm.environment">
           <option>Production</option>
           <option>Staging</option>
@@ -40,21 +58,24 @@
         </select>
       </div>
     </div>
+  </div><!-- /well -->
+  <div class="well">
+    <p class="lead">Details</p>
     <div class="form-group">
       <label for="inputNetwork" class="col-lg-2 control-label">Network</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputNetwork" placeholder="network" ng-model="alarm.network" >
       </div>
     </div>
     <div class="form-group">
       <label for="inputDevice" class="col-lg-2 control-label">Device</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputDevice" placeholder="device" ng-model="alarm.device" >
       </div>
     </div>
     <div class="form-group">
       <label for="inputApplication" class="col-lg-2 control-label">Application</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputApplication" placeholder="application" ng-model="alarm.application" >
       </div>
     </div>
@@ -64,16 +85,21 @@
         <div text-angular ng-model="alarm.description" ></div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="inputStatus" class="col-lg-2 control-label">Status</label>
-      <div class="col-lg-10">
-        <select id="inputStatus" class="form-control" placeholder="status" ng-model="alarm.status">
-          <option>Open</option>
-          <option>Acknowledged</option>
-          <option>Resolved</option>
-        </select>
-      </div>
-    </div>
+  </div><!-- /well -->
+
+</uib-tab>
+<uib-tab>
+  <uib-tab-heading> <i class="fa fa-comment"></i> Log </uib-tab-heading>
+  <br>
+  Log Details and Comments Here
+</uib-tab>
+<uib-tab>
+  <uib-tab-heading> <i class="fa fa-link"></i> Links </uib-tab-heading>
+  <br>
+  Links Here
+</uib-tab>
+    </uib-tabset>
+    <br>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <a href="#/requests" class="btn btn-xs btn-default">Cancel</a>

@@ -2,51 +2,67 @@
 <form class="form-horizontal well" ng-init="getAlarm()">
   <fieldset>
     <legend>View Alarm</legend>
+
+    <uib-tabset>
+        <uib-tab>
+          <uib-tab-heading> <i class="fa fa-info-circle"></i> Details </uib-tab-heading>
+          <br>
+          <div class="well">
+            <p class="lead">Summary</p>
     <div class="form-group">
       <label for="inputId" class="col-lg-2 control-label">Id</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputId" placeholder="id" ng-model="alarm.$id" readonly>
       </div>
     </div>
     <div class="form-group">
       <label for="inputMessage" class="col-lg-2 control-label">Message</label>
-      <div class="col-lg-10">
+      <div class="col-lg-5">
         <input type="text" class="form-control" id="inputMessage" placeholder="message" ng-model="alarm.message" readonly >
       </div>
     </div>
     <div class="form-group">
+      <label for="inputStatus" class="col-lg-2 control-label">Status</label>
+      <div class="col-lg-3">
+        <input type="text" class="form-control" id="inputStatus" placeholder="status" ng-model="alarm.status" readonly>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="inputSource" class="col-lg-2 control-label">Source</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputSource" placeholder="source" ng-model="alarm.source" readonly >
       </div>
     </div>
     <div class="form-group">
       <label for="inputType" class="col-lg-2 control-label">Type</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputType" placeholder="type" ng-model="alarm.type" readonly >
       </div>
     </div>
     <div class="form-group">
       <label for="inputEnvironment" class="col-lg-2 control-label">Environment</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputEnvironment" placeholder="environment" ng-model="alarm.environment" readonly>
       </div>
     </div>
+  </div> <!-- /well -->
+  <div class="well">
+    <p class="lead">Details</p>
     <div class="form-group">
       <label for="inputNetwork" class="col-lg-2 control-label">Network</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputNetwork" placeholder="network" ng-model="alarm.network" readonly>
       </div>
     </div>
     <div class="form-group">
       <label for="inputDevice" class="col-lg-2 control-label">Device</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputDevice" placeholder="device" ng-model="alarm.device" readonly>
       </div>
     </div>
     <div class="form-group">
       <label for="inputApplication" class="col-lg-2 control-label">Application</label>
-      <div class="col-lg-10">
+      <div class="col-lg-3">
         <input type="text" class="form-control" id="inputApplication" placeholder="application" ng-model="alarm.application" readonly>
       </div>
     </div>
@@ -56,17 +72,25 @@
         <div ta-bind ng-model="alarm.description" ></div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="inputStatus" class="col-lg-2 control-label">Status</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputStatus" placeholder="status" ng-model="alarm.status" readonly>
-      </div>
-    </div>
+  </div><!-- /well -->
+
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <a href="#/alarms" class="btn btn-sm btn-default">Back</a>
         <a href="#/alarms/edit/{{alarm.$id}}" class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o"> Edit</i></a>
       </div>
     </div>
+  </uib-tab>
+    <uib-tab>
+      <uib-tab-heading> <i class="fa fa-comment"></i> Log </uib-tab-heading>
+      <br>
+      Log Details and Comments Here
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading> <i class="fa fa-link"></i> Links </uib-tab-heading>
+      <br>
+      Links Here
+    </uib-tab>
+  </uib-tabset>
   </fieldset>
 </form>
