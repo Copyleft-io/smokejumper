@@ -30,6 +30,15 @@ var app = angular.module('smokejumper', ['firebase','angular-md5','ui.bootstrap'
           }
         }
       })
+      .state('logout', {
+        url: '/logout',
+        templateUrl: 'static/home.html',
+        resolve: {
+          requireNoAuth: function($state, Auth) {
+            Auth.$unauth();
+          }
+        }
+      })
       .state('register', {
         url: '/register',
         controller: 'AuthCtrl as authCtrl',
